@@ -9,12 +9,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.proyecto2.R
+import com.example.proyecto2.core.Common.BASEIMG_URL
 import com.example.proyecto2.data.Film
+import com.example.proyecto2.data.models.MovieBasic
+import com.example.proyecto2.data.models.MovieBasicResponse
 
 class MovieListAdapter(private val context: Context) :
     RecyclerView.Adapter<MovieListAdapter.ItemViewHolder>() {
 
-    var dataset : List<Film> = emptyList()
+    var dataset : MovieBasicResponse = MovieBasicResponse()
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.title_text)
@@ -30,23 +33,23 @@ class MovieListAdapter(private val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = dataset[position]
-        holder.title.text = context.resources.getString(item.titleId)
+      /*  val item = dataset.movieList[position]
+        holder.title.text = item.title
 
 
         Glide.with(context)
-            .load(item.image_URL)
+            .load(BASEIMG_URL + item.img_url)
             .fitCenter()
             .placeholder(R.drawable.image_placeholder)
             .into(holder.poster)
-
+    */
     }
 
     override fun getItemCount(): Int {
-        return dataset.size
+        return 0 //dataset.movieList.size
     }
 
-    fun setDatabase( data: List<Film>){
+    fun setDatabase( data: MovieBasicResponse){
         dataset = data
     }
 
