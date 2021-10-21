@@ -1,9 +1,9 @@
 package com.example.proyecto2
 
-import com.example.proyecto2.Models.Friend
-import com.example.proyecto2.Models.MainViewModel
-import com.example.proyecto2.Models.SchoolCourse
-import com.example.proyecto2.Models.Student
+import com.example.proyecto2.models.Friend
+import com.example.proyecto2.models.MainViewModel
+import com.example.proyecto2.models.SchoolCourse
+import com.example.proyecto2.models.Student
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module

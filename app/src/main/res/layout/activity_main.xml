@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".presentation.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.example.proyecto2.UI.StartScreenFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:name="com.example.proyecto2.presentation.StartScreen.StartScreenFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_start_screen"
-        />
+        tools:layout="@layout/fragment_start_screen" />
 </androidx.constraintlayout.widget.ConstraintLayout>
