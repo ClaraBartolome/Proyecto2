@@ -8,15 +8,16 @@ import com.example.proyecto2.data.models.MovieBasicResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.Call
+import retrofit2.http.Query
 
 interface MovieAPI {
     //todo pagination
-    @GET("discover/movie?api_key={api_key}&lenguage={lenguage}&sort_by={sort}&include_adult={includeAdult}")
+    @GET("discover/movie")
     suspend fun getMovieList(
-        @Path("api_key") api_key: String = API_KEY,
-        @Path("lenguage") idioma: String = LENGUAGE_ESP,
-        @Path("sort") sort: String = SORT_POPULARITY,
-        @Path("includeAdult") adult: String = "false"
+        @Query("api_key") api_key: String = API_KEY,
+        @Query("lenguage") idioma: String = LENGUAGE_ESP,
+        @Query("sort_by") sort: String = SORT_POPULARITY,
+        @Query("include_adult") adult: String = "false"
     ): MovieBasicResponse
 }
 
