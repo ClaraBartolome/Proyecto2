@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.proyecto2.R
 import com.example.proyecto2.core.Common.BASEIMG_URL
 import com.example.proyecto2.data.Film
@@ -40,7 +41,6 @@ class MovieListAdapter(private val context: Context) :
         Glide.with(context)
             .load(BASEIMG_URL + item.img_url)
             .fitCenter()
-            .placeholder(R.drawable.image_placeholder)
             .into(holder.poster)
 
     }

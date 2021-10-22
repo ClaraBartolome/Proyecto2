@@ -8,7 +8,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="8dp"
-    card_view:cardBackgroundColor="@color/bg"
+    card_view:cardBackgroundColor="@color/bg_card"
     card_view:cardCornerRadius="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,18 +19,17 @@
             android:id="@+id/poster_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxHeight="270dp"
+            android:maxWidth="185dp"
+            android:layout_marginBottom="70dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/Title_film"
-            android:maxWidth="300dp"
-            android:maxHeight="300dp"
-            android:paddingBottom="8dp"
             android:scaleType="fitCenter"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintVertical_bias="0.0"
-            tools:srcCompat="@drawable/image_placeholder" />
+            card_view:srcCompat="@drawable/image_placeholder" />
 
         <TextView
             android:id="@+id/title_text"

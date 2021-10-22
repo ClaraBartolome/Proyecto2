@@ -1,6 +1,7 @@
 package com.example.proyecto2.presentation.StartScreen
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.view.isVisible
@@ -12,6 +13,7 @@ import com.example.proyecto2.databinding.FragmentStartScreenBinding
 import com.example.proyecto2.presentation.models.LoadingState
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.log
 
 
 class StartScreenFragment : Fragment(R.layout.fragment_start_screen) {
@@ -34,7 +36,6 @@ class StartScreenFragment : Fragment(R.layout.fragment_start_screen) {
     }
 
     fun setupAdapter() {
-
         with(binding) {
             recyclerView.adapter = madapter
         }
@@ -60,6 +61,8 @@ class StartScreenFragment : Fragment(R.layout.fragment_start_screen) {
         with(binding) {
             progressBar.isVisible = false
             recyclerView.isVisible = false
+            searchButton.isVisible = false
+            textInputLayout.isVisible = false
             errorText.isVisible = true
             errorText.text = "Load error. Retry again."
             retryButton.setOnClickListener { viewModel.getMovies() }
@@ -73,8 +76,21 @@ class StartScreenFragment : Fragment(R.layout.fragment_start_screen) {
             recyclerView.isVisible = !b
             errorText.isVisible = false
             retryButton.isVisible = false
-        }
+            searchButton.isVisible = !b
+            textInputLayout.isVisible = !b
 
+            if(!b){
+                searchButton.setOnClickListener {
+                    textInputLayout.editText?.let {
+                        searchFilm(it.text.toString())
+                    }
+                     }
+            }
+        }
+    }
+
+    private fun searchFilm(name: String){
+        Log.d("title", name)
     }
 
 }
