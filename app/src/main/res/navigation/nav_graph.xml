@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/startScreenFragment">
+
+    <fragment
+        android:id="@+id/startScreenFragment"
+        android:name="com.example.proyecto2.presentation.StartScreen.StartScreenFragment"
+        android:label="StartScreenFragment" >
+        <action
+            android:id="@+id/action_startScreenFragment_to_showMovieFragment"
+            app:destination="@id/showMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showMovieFragment"
+        android:name="com.example.proyecto2.presentation.showMovieScreen.showMovieFragment"
+        android:label="showMovieFragment" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
+</navigation>

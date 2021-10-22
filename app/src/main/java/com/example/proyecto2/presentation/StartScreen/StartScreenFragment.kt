@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.proyecto2.models.MainViewModel
 import com.example.proyecto2.core.Common.viewBinding
 import com.example.proyecto2.R
@@ -79,18 +81,25 @@ class StartScreenFragment : Fragment(R.layout.fragment_start_screen) {
             searchButton.isVisible = !b
             textInputLayout.isVisible = !b
 
-            if(!b){
+            if (!b) {
                 searchButton.setOnClickListener {
                     textInputLayout.editText?.let {
                         searchFilm(it.text.toString())
                     }
-                     }
+                }
             }
         }
     }
 
-    private fun searchFilm(name: String){
-        Log.d("title", name)
+    private fun searchFilm(name: String) {
+        val action =
+            StartScreenFragmentDirections
+                .actionStartScreenFragmentToShowMovieFragment(
+                    title = name
+                )
+        findNavController()
+            .navigate(action)
+
     }
 
 }
