@@ -33,7 +33,7 @@ class MovieListAdapter(private val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-      /*  val item = dataset.movieList[position]
+        val item = dataset.movieList[position]
         holder.title.text = item.title
 
 
@@ -42,11 +42,11 @@ class MovieListAdapter(private val context: Context) :
             .fitCenter()
             .placeholder(R.drawable.image_placeholder)
             .into(holder.poster)
-    */
+
     }
 
     override fun getItemCount(): Int {
-        return 0 //dataset.movieList.size
+        return dataset.movieList.size
     }
 
     fun setDatabase( data: MovieBasicResponse){

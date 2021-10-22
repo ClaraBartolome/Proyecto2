@@ -3,11 +3,13 @@ package com.example.proyecto2.presentation.StartScreen
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.core.view.isVisible
 import com.example.proyecto2.models.MainViewModel
 import com.example.proyecto2.core.Common.viewBinding
 import com.example.proyecto2.R
 import com.example.proyecto2.data.Database
 import com.example.proyecto2.databinding.FragmentStartScreenBinding
+import com.example.proyecto2.presentation.models.LoadingState
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,26 +29,52 @@ class StartScreenFragment : Fragment(R.layout.fragment_start_screen) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         attachObservers()
+        setupAdapter()
         viewModel.getMovies()
     }
 
-    fun test(){
-        //binding.textFragment.text = "Holiwis"
-        //madapter.setDatabase(Database().loadFilms())
-        with(binding){
+    fun setupAdapter() {
+
+        with(binding) {
             recyclerView.adapter = madapter
         }
     }
 
-    fun attachObservers(){
+    fun attachObservers() {
         viewModel.movieList.observe(viewLifecycleOwner, {
             madapter.setDatabase(it)
             madapter.notifyDataSetChanged()
         })
 
-        with(binding){
-            recyclerView.adapter = madapter
+        viewModel.loadingState.observe(viewLifecycleOwner, { loadingState ->
+            when (loadingState.status) {
+                LoadingState.Status.RUNNING -> showLoading(true)
+                LoadingState.Status.SUCCESS -> showLoading(false)
+                LoadingState.Status.FAILED -> showError()
+            }
+        })
+
+    }
+
+    private fun showError() {
+        with(binding) {
+            progressBar.isVisible = false
+            recyclerView.isVisible = false
+            errorText.isVisible = true
+            errorText.text = "Load error. Retry again."
+            retryButton.setOnClickListener { viewModel.getMovies() }
+            retryButton.isVisible = true
         }
+    }
+
+    private fun showLoading(b: Boolean) {
+        with(binding) {
+            progressBar.isVisible = b
+            recyclerView.isVisible = !b
+            errorText.isVisible = false
+            retryButton.isVisible = false
+        }
+
     }
 
 }

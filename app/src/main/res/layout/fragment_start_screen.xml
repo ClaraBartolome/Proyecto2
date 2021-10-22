@@ -9,6 +9,38 @@
         android:layout_height="match_parent">
 
 
+        <TextView
+            android:id="@+id/error_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:ems="8"
+            android:fontFamily="sans-serif-medium"
+            android:lines="2"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Error:" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="100dp"
+            android:minHeight="100dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
 
             android:id="@+id/recycler_view"
@@ -16,12 +48,31 @@
             android:layout_height="match_parent"
             android:padding="8dp"
             android:scrollbars="vertical"
+            android:visibility="gone"
             app:layoutManager="GridLayoutManager"
-            app:spanCount="2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="2"
             tools:listitem="@layout/item_movie_list" />
+
+        <ImageButton
+            android:id="@+id/retry_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/circle_corners"
+            android:minWidth="70dp"
+            android:minHeight="70dp"
+            android:maxWidth="70dp"
+            android:maxHeight="70dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_replay"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/error_text"
+            app:layout_constraintStart_toStartOf="@+id/error_text"
+            app:layout_constraintTop_toBottomOf="@+id/error_text"
+            tools:srcCompat="@drawable/ic_replay" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

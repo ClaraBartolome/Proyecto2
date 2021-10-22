@@ -25,7 +25,9 @@ class StartScrenViewModel(
     }
 
     private val _loadingState = MutableLiveData<LoadingState>()
-    val _movielist = MutableLiveData <MovieBasicResponse>()
+    val loadingState: LiveData<LoadingState>
+        get() = _loadingState
+    private val _movielist = MutableLiveData<MovieBasicResponse>()
     val movieList: LiveData<MovieBasicResponse>
         get() = _movielist
 
@@ -37,12 +39,13 @@ class StartScrenViewModel(
                         _loadingState.postValue(
                             LoadingState.error(LOAD_ERROR)
                         )
-                            Log.d("FAIL:", "Fallo")
+                        Log.d("FAIL:", "Fallo")
 
                     }
                     .collect {
                         _movielist.postValue(it)
                         _loadingState.postValue(LoadingState.LOADED)
+                        Log.d("LOADED:", "${it.movieList.size}")
                     }
             }
         }
