@@ -6,6 +6,7 @@
     android:id="@+id/card_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+
     android:layout_gravity="center"
     android:layout_margin="8dp"
     card_view:cardBackgroundColor="@color/bg_card"
@@ -17,11 +18,11 @@
 
         <ImageView
             android:id="@+id/poster_image"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxHeight="270dp"
-            android:maxWidth="185dp"
             android:layout_marginBottom="70dp"
+            android:minHeight="230dp"
+            android:minWidth="300dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/Title_film"
             android:scaleType="fitCenter"
