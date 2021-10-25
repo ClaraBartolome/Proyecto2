@@ -7,17 +7,31 @@
     <fragment
         android:id="@+id/startScreenFragment"
         android:name="com.example.proyecto2.presentation.StartScreen.StartScreenFragment"
-        android:label="StartScreenFragment" >
+        android:label="películas populares">
         <action
             android:id="@+id/action_startScreenFragment_to_showMovieFragment"
             app:destination="@id/showMovieFragment" />
+        <action
+            android:id="@+id/action_startScreenFragment_to_showMovieInfoFragment"
+            app:destination="@id/showMovieInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/showMovieFragment"
-        android:name="com.example.proyecto2.presentation.showMovieScreen.showMovieFragment"
-        android:label="showMovieFragment" >
+        android:name="com.example.proyecto2.presentation.ShowMovieSearchScreen.showMovieFragment"
+        android:label="resultados de la búsqueda">
         <argument
             android:name="title"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_showMovieFragment_to_showMovieInfoFragment"
+            app:destination="@id/showMovieInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showMovieInfoFragment"
+        android:name="com.example.proyecto2.presentation.ShowMovieInfoScreen.ShowMovieInfoFragment"
+        android:label="Información">
+        <argument
+            android:name="id"
             app:argType="string" />
     </fragment>
 </navigation>

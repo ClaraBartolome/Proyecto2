@@ -21,10 +21,17 @@ interface MovieAPI {
         @Query("include_adult") adult: String = "false"
     ): MovieBasicResponse
 
-    @GET("/movie?")
-    suspend fun getMovieDetails(
+    @GET("search/movie?")
+    suspend fun getMovieSearch(
         @Query("api_key") api_key: String = API_KEY,
-        @Query("query") idioma: String
+        @Query("query") name: String
+    ): MovieBasicResponse
+
+    @GET("movie/{movie_id}?")
+    suspend fun getMovieDetails(
+        @Path("movie_id") id: String,
+        @Query("api_key") api_key: String = API_KEY
+
     ): MovieDetails
 }
 

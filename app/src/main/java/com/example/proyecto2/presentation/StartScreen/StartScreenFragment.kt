@@ -84,7 +84,10 @@ class StartScreenFragment : Fragment(R.layout.fragment_start_screen) {
             if (!b) {
                 searchButton.setOnClickListener {
                     textInputLayout.editText?.let {
-                        searchFilm(it.text.toString())
+                        if(it.text.toString() != ""){
+                            searchFilm(it.text.toString())
+                        }
+
                     }
                 }
             }

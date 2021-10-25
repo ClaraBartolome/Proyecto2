@@ -1,4 +1,4 @@
-package com.example.proyecto2.presentation.StartScreen
+package com.example.proyecto2.presentation.ShowMovieSearchScreen
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,18 +8,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.proyecto2.R
 import com.example.proyecto2.core.Common.BASEIMG_URL
-import com.example.proyecto2.data.Film
-import com.example.proyecto2.data.models.MovieBasic
 import com.example.proyecto2.data.models.MovieBasicResponse
+import com.example.proyecto2.presentation.StartScreen.MovieListAdapter
+import com.example.proyecto2.presentation.StartScreen.StartScreenFragmentDirections
 
-class MovieListAdapter(private val context: Context) :
-    RecyclerView.Adapter<MovieListAdapter.ItemViewHolder>() {
+class ShowMovieSearchAdapter(private val context: Context) :
+    RecyclerView.Adapter<ShowMovieSearchAdapter.ItemViewHolder>() {
 
     var dataset: MovieBasicResponse = MovieBasicResponse()
 
@@ -49,8 +47,8 @@ class MovieListAdapter(private val context: Context) :
 
         holder.container.setOnClickListener {
             val action =
-                StartScreenFragmentDirections
-                    .actionStartScreenFragmentToShowMovieInfoFragment(
+                showMovieFragmentDirections
+                    .actionShowMovieFragmentToShowMovieInfoFragment(
                         id = item.id)
             holder.view.findNavController().navigate(action)
         }

@@ -5,11 +5,11 @@ import com.example.proyecto2.core.Common.BASE_URL
 import com.example.proyecto2.data.MovieAPI
 import com.example.proyecto2.data.MovieRepository
 import com.example.proyecto2.models.Friend
-import com.example.proyecto2.models.MainViewModel
 import com.example.proyecto2.models.SchoolCourse
 import com.example.proyecto2.models.Student
-import com.example.proyecto2.presentation.BaseViewModel
+import com.example.proyecto2.presentation.ShowMovieInfoScreen.ShowMovieInfoViewModel
 import com.example.proyecto2.presentation.StartScreen.StartScrenViewModel
+import com.example.proyecto2.presentation.ShowMovieSearchScreen.ShowMovieSearchViewModel
 import com.example.proyecto2.utils.AppDispatcherFactory
 import com.example.proyecto2.utils.DispatcherFactory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -40,6 +40,18 @@ val viewModelModule: Module = module {
         get(),
         getMoviesUseCase = get(named("get_movies"))
     )}
+
+    viewModel { ShowMovieSearchViewModel (
+                get(),
+                getMovieSearchUseCase = get(named("get_movie_search"))
+            )
+    }
+
+    viewModel { ShowMovieInfoViewModel (
+        get(),
+        getMovieDetailsUseCase = get(named("get_movie_details"))
+    )
+    }
 }
 
 val dispatcherFactoryModule = module {
