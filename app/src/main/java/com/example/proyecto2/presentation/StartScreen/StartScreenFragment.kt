@@ -2,6 +2,7 @@ package com.example.proyecto2.presentation.StartScreen
 
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.view.isVisible
@@ -90,6 +91,21 @@ class StartScreenFragment : Fragment(R.layout.fragment_start_screen) {
 
                     }
                 }
+                
+                textInputLayout.editText?.setOnKeyListener(
+                    View.OnKeyListener { v, keyCode, event ->
+                    if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                        textInputLayout.editText?.let {
+                            if(it.text.toString() != ""){
+                                searchFilm(it.text.toString())
+                            }
+
+                        }
+                        Log.d("TECLA ENTER", "Pulsada")
+                        return@OnKeyListener true
+                    }
+                    false
+                })
             }
         }
     }
