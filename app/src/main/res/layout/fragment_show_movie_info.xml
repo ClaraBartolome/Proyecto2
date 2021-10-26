@@ -96,7 +96,7 @@
             android:id="@+id/info_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="-20dp"
+            android:layout_marginStart="-20dp"
             android:layout_marginBottom="-20dp"
             android:background="@drawable/rounded_text"
             android:ems="1"
@@ -107,7 +107,7 @@
             android:textSize="24sp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/info_posterImageView"
-            app:layout_constraintEnd_toEndOf="@+id/info_posterImageView"
+            app:layout_constraintStart_toStartOf="@+id/info_posterImageView"
             tools:text="5.5" />
 
         <TextView
@@ -128,6 +128,23 @@
             app:layout_constraintStart_toStartOf="@+id/info_title"
             app:layout_constraintTop_toBottomOf="@+id/info_title"
             tools:text="@string/Title_film" />
+
+        <ImageButton
+            android:id="@+id/button_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="-20dp"
+            android:layout_marginBottom="-20dp"
+            android:adjustViewBounds="false"
+            android:background="@drawable/circle_corners_like"
+            android:minWidth="60dp"
+            android:minHeight="60dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_favourite_border"
+            app:layout_constraintBottom_toBottomOf="@+id/info_posterImageView"
+            app:layout_constraintEnd_toEndOf="@+id/info_posterImageView"
+            tools:ignore="VectorDrawableCompat"
+            tools:src="@drawable/ic_favourite_border" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@ import com.example.proyecto2.databinding.FragmentFavouriteMoviesBinding
 import com.example.proyecto2.databinding.FragmentShowMovieInfoBinding
 import com.example.proyecto2.presentation.ShowMovieSearchScreen.ShowMovieSearchAdapter
 import com.example.proyecto2.presentation.models.LoadingState
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavouriteMoviesFragment : Fragment(R.layout.fragment_favourite_movies) {
@@ -19,7 +20,7 @@ class FavouriteMoviesFragment : Fragment(R.layout.fragment_favourite_movies) {
     val binding by viewBinding<FragmentFavouriteMoviesBinding>()
 
     val madapter: FavouriteMoviesAdapter by lazy {
-        FavouriteMoviesAdapter(this.requireContext(), AppDatabase.getDatabase(this.requireContext()))
+        FavouriteMoviesAdapter(this.requireContext(), get())
     }
 
 

@@ -14,6 +14,7 @@ import com.example.proyecto2.R
 import com.example.proyecto2.data.AppDatabase
 import com.example.proyecto2.databinding.FragmentStartScreenBinding
 import com.example.proyecto2.presentation.models.LoadingState
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.log
@@ -28,7 +29,7 @@ class StartScreenFragment : Fragment(R.layout.fragment_start_screen) {
     val binding by viewBinding<FragmentStartScreenBinding>()
 
     val madapter: MovieListAdapter by lazy {
-        MovieListAdapter(this.requireContext(), AppDatabase.getDatabase(this.requireContext()))
+        MovieListAdapter(this.requireContext(), get())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

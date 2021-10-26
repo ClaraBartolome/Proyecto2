@@ -8,7 +8,9 @@ import com.bumptech.glide.Glide
 import com.example.proyecto2.R
 import com.example.proyecto2.core.Common.BASEIMG_URL
 import com.example.proyecto2.core.Common.viewBinding
+import com.example.proyecto2.data.AppDatabase
 import com.example.proyecto2.data.models.MovieDetails
+import com.example.proyecto2.data.models.MovieTable
 import com.example.proyecto2.databinding.FragmentShowMovieInfoBinding
 import com.example.proyecto2.databinding.FragmentShowMovieSearchBinding
 import com.example.proyecto2.presentation.ShowMovieSearchScreen.ShowMovieSearchViewModel
@@ -20,6 +22,7 @@ class ShowMovieInfoFragment : Fragment(R.layout.fragment_show_movie_info) {
 
     val viewModel by viewModel<ShowMovieInfoViewModel>()
     val binding by viewBinding<FragmentShowMovieInfoBinding>()
+    val hearts = listOf(R.drawable.ic_favorite, R.drawable.ic_favourite_border)
 
     companion object {
         val ID = "id"
@@ -27,12 +30,15 @@ class ShowMovieInfoFragment : Fragment(R.layout.fragment_show_movie_info) {
 
     private lateinit var movie_id:String
     private lateinit var movieinfo: MovieDetails
+    private lateinit var db: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             movie_id = it.getString(ID).toString()
         }
+
+        db = AppDatabase.getDatabase(this.requireContext())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,6 +72,25 @@ class ShowMovieInfoFragment : Fragment(R.layout.fragment_show_movie_info) {
                 .load(BASEIMG_URL + movieinfo.img_url)
                 .fitCenter()
                 .into(infoPosterImageView)
+
+            if(db.movieDao().isRowIsExist(movie_id.toInt())){
+                buttonLike.setImageResource(hearts[0])
+            }else{
+                buttonLike.setImageResource(hearts[1])
+            }
+
+            buttonLike.setOnClickListener {
+                if(db.movieDao().isRowIsExist(movie_id.toInt())){
+                    //Si existe eliminamos la película de la tabla
+                    db.movieDao().deleteMovie(MovieTable(movie_id.toInt(), movieinfo.title, movieinfo.img_url))
+                    buttonLike.setImageResource(hearts[1])
+                }else{
+                    //Si no existe la añadimos
+                    db.movieDao().insertMovie(MovieTable(movie_id.toInt(), movieinfo.title, movieinfo.img_url))
+                    buttonLike.setImageResource(hearts[0])
+                }
+            }
+
         }
     }
 
@@ -76,6 +101,7 @@ class ShowMovieInfoFragment : Fragment(R.layout.fragment_show_movie_info) {
             infoOverview.isVisible = false
             infoScore.isVisible = false
             infoPosterImageView.isVisible = false
+            buttonLike.isVisible = false
             errorText.isVisible = true
             retryButton.setOnClickListener { viewModel.getMovieInfo(movie_id) }
             retryButton.isVisible = true
@@ -91,6 +117,7 @@ class ShowMovieInfoFragment : Fragment(R.layout.fragment_show_movie_info) {
             infoOverview.isVisible = !b
             infoScore.isVisible = !b
             infoPosterImageView.isVisible = !b
+            buttonLike.isVisible = !b
         }
     }
 
