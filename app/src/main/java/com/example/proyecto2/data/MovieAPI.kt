@@ -3,12 +3,10 @@ package com.example.proyecto2.data
 import com.example.proyecto2.core.Common.API_KEY
 import com.example.proyecto2.core.Common.LENGUAGE_ESP
 import com.example.proyecto2.core.Common.SORT_POPULARITY
-import com.example.proyecto2.data.models.MovieBasic
 import com.example.proyecto2.data.models.MovieBasicResponse
 import com.example.proyecto2.data.models.MovieDetails
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.Call
 import retrofit2.http.Query
 
 interface MovieAPI {

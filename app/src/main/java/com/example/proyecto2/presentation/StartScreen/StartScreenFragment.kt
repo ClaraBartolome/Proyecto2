@@ -2,16 +2,16 @@ package com.example.proyecto2.presentation.StartScreen
 
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.proyecto2.models.MainViewModel
 import com.example.proyecto2.core.Common.viewBinding
 import com.example.proyecto2.R
-import com.example.proyecto2.data.Database
+import com.example.proyecto2.data.AppDatabase
 import com.example.proyecto2.databinding.FragmentStartScreenBinding
 import com.example.proyecto2.presentation.models.LoadingState
 import org.koin.android.ext.android.inject
@@ -28,14 +28,26 @@ class StartScreenFragment : Fragment(R.layout.fragment_start_screen) {
     val binding by viewBinding<FragmentStartScreenBinding>()
 
     val madapter: MovieListAdapter by lazy {
-        MovieListAdapter(this.requireContext())
+        MovieListAdapter(this.requireContext(), AppDatabase.getDatabase(this.requireContext()))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         attachObservers()
         setupAdapter()
         viewModel.getMovies()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.options_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item!!,
+            requireView().findNavController())
+                || super.onOptionsItemSelected(item)
     }
 
     fun setupAdapter() {

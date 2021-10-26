@@ -7,6 +7,7 @@ import com.example.proyecto2.data.MovieRepository
 import com.example.proyecto2.models.Friend
 import com.example.proyecto2.models.SchoolCourse
 import com.example.proyecto2.models.Student
+import com.example.proyecto2.presentation.FavouriteMovies.FavouriteMoviesViewModel
 import com.example.proyecto2.presentation.ShowMovieInfoScreen.ShowMovieInfoViewModel
 import com.example.proyecto2.presentation.StartScreen.StartScrenViewModel
 import com.example.proyecto2.presentation.ShowMovieSearchScreen.ShowMovieSearchViewModel
@@ -16,6 +17,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.core.qualifier.named
@@ -52,6 +54,8 @@ val viewModelModule: Module = module {
         getMovieDetailsUseCase = get(named("get_movie_details"))
     )
     }
+
+    viewModel { FavouriteMoviesViewModel() }
 }
 
 val dispatcherFactoryModule = module {

@@ -1,7 +1,6 @@
-package com.example.proyecto2.presentation.StartScreen
+package com.example.proyecto2.presentation.FavouriteMovies
 
 import android.content.Context
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,13 +14,12 @@ import com.bumptech.glide.Glide
 import com.example.proyecto2.R
 import com.example.proyecto2.core.Common.BASEIMG_URL
 import com.example.proyecto2.data.AppDatabase
-import com.example.proyecto2.data.models.MovieBasicResponse
 import com.example.proyecto2.data.models.MovieTable
 
-class MovieListAdapter(private val context: Context, private val db: AppDatabase) :
-    RecyclerView.Adapter<MovieListAdapter.ItemViewHolder>() {
+class FavouriteMoviesAdapter(private val context: Context, private val db: AppDatabase) :
+    RecyclerView.Adapter<FavouriteMoviesAdapter.ItemViewHolder>() {
 
-    var dataset: MovieBasicResponse = MovieBasicResponse()
+    var dataset: List<MovieTable> = listOf()
     val hearts = listOf(R.drawable.ic_favorite, R.drawable.ic_favourite_border)
 
     class ItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
@@ -40,20 +38,20 @@ class MovieListAdapter(private val context: Context, private val db: AppDatabase
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = dataset.movieList[position]
+        val item = dataset[position]
         holder.title.text = item.title
 
 
         Glide.with(context)
-            .load(BASEIMG_URL + item.img_url)
+            .load(BASEIMG_URL + item.url)
             .fitCenter()
             .into(holder.poster)
 
         holder.container.setOnClickListener {
-            val action =
-                StartScreenFragmentDirections
-                    .actionStartScreenFragmentToShowMovieInfoFragment(
-                        id = item.id)
+            val action = FavouriteMoviesFragmentDirections
+                .actionFavouriteMoviesFragmentToShowMovieInfoFragment(
+                    id = item.id.toString())
+
             holder.view.findNavController().navigate(action)
         }
 
@@ -66,24 +64,23 @@ class MovieListAdapter(private val context: Context, private val db: AppDatabase
         holder.likeButton.setOnClickListener {
             if(db.movieDao().isRowIsExist(item.id.toInt())){
                 //Si existe eliminamos la película de la tabla
-                db.movieDao().deleteMovie(MovieTable(item.id.toInt(), item.title, item.img_url))
+                db.movieDao().deleteMovie(MovieTable(item.id.toInt(), item.title, item.url))
                 holder.likeButton.setImageResource(hearts[1])
             }else{
                 //Si no existe la añadimos
-                db.movieDao().insertMovie(MovieTable(item.id.toInt(), item.title, item.img_url))
+                db.movieDao().insertMovie(MovieTable(item.id.toInt(), item.title, item.url))
                 holder.likeButton.setImageResource(hearts[0])
             }
         }
 
+
     }
-
-
 
     override fun getItemCount(): Int {
-        return dataset.movieList.size
+        return dataset.size
     }
 
-    fun setDatabase(data: MovieBasicResponse) {
+    fun setDatabase(data: List<MovieTable>) {
         dataset = data
     }
 

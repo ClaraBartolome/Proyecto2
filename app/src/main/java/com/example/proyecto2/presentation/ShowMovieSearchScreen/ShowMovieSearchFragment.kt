@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import com.example.proyecto2.R
 import com.example.proyecto2.core.Common.viewBinding
+import com.example.proyecto2.data.AppDatabase
 import com.example.proyecto2.databinding.FragmentShowMovieSearchBinding
 import com.example.proyecto2.presentation.StartScreen.MovieListAdapter
 import com.example.proyecto2.presentation.models.LoadingState
@@ -19,7 +20,7 @@ class showMovieFragment : Fragment(R.layout.fragment_show_movie_search) {
     val binding by viewBinding<FragmentShowMovieSearchBinding>()
 
     val madapter: ShowMovieSearchAdapter by lazy {
-        ShowMovieSearchAdapter(this.requireContext())
+        ShowMovieSearchAdapter(this.requireContext(), AppDatabase.getDatabase(this.requireContext()))
     }
 
     companion object {
@@ -35,6 +36,7 @@ class showMovieFragment : Fragment(R.layout.fragment_show_movie_search) {
             titleId = it.getString(TITLE).toString()
 
             Log.d("Title:", titleId)
+            titleId = titleId.replace(" ", "+")
         }
     }
 

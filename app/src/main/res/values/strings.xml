@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">Proyecto2</string>
+    <string name="app_name">Movie List</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="Title_film">Venom: Habrá Matanza</string>
     <string name="Title_film_test">Peaky Blinders</string>
     <string name="poster_film">poster_film</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Holi</string>
+    <string name="film_favs">Películas Favoritas</string>
 </resources>

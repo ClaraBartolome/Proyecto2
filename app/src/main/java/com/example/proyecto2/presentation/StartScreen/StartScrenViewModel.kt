@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.proyecto2.Usercases.GetMoviesUseCase
-import com.example.proyecto2.data.models.MovieBasic
 import com.example.proyecto2.data.models.MovieBasicResponse
 import com.example.proyecto2.presentation.BaseViewModel
 import com.example.proyecto2.presentation.models.LoadingState

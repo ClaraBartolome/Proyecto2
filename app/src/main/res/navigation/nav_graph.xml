@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/startScreenFragment">
 
@@ -10,13 +11,13 @@
         android:label="películas populares">
         <action
             android:id="@+id/action_startScreenFragment_to_showMovieFragment"
-            app:destination="@id/showMovieFragment" />
+            app:destination="@id/showMovieSearchFragment" />
         <action
             android:id="@+id/action_startScreenFragment_to_showMovieInfoFragment"
             app:destination="@id/showMovieInfoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/showMovieFragment"
+        android:id="@+id/showMovieSearchFragment"
         android:name="com.example.proyecto2.presentation.ShowMovieSearchScreen.showMovieFragment"
         android:label="resultados de la búsqueda">
         <argument
@@ -33,5 +34,14 @@
         <argument
             android:name="id"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouriteMoviesFragment"
+        android:name="com.example.proyecto2.presentation.FavouriteMovies.FavouriteMoviesFragment"
+        android:label="películas favoritas"
+        tools:layout="@layout/fragment_favourite_movies">
+        <action
+            android:id="@+id/action_favouriteMoviesFragment_to_showMovieInfoFragment"
+            app:destination="@id/showMovieInfoFragment" />
     </fragment>
 </navigation>
